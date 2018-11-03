@@ -27,7 +27,8 @@ popup.addEventListener('click', function (event) {
 },60000);
 
 for (let i=0; i< phone.length; i++) {
-	phone[i].addEventListener('click', function () {
+	phone[i].addEventListener('click', function (event) {
+		event.preventDefault();
 		popup.style.display = 'block';
 		popup.addEventListener('click', function (event) {
 			let target = event.target;
