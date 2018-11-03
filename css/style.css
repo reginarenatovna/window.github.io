@@ -686,9 +686,6 @@ textarea:focus {
   z-index: 9;
   background-color: rgba(0, 0, 0, 0.5);
 }
-.popup_engineer-show {
-  display: block;
-}
 .popup_content,
 .popup_engineer_content,
 .popup_calc_end_content {
