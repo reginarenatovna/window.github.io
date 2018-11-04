@@ -4,7 +4,8 @@ function form() {
 			popupForm = document.querySelectorAll('.popup_form'),
 			phone = document.querySelectorAll('.phone_link'),
 			popupEngineer = document.querySelector('.popup_engineer');
-headerBtn.addEventListener('click', function () {
+headerBtn.addEventListener('click', function (event) {
+	event.preventDefault();
 	popupEngineer.style.display = 'block';
 	document.body.style.overflow = 'hidden';
 	popupEngineer.addEventListener('click', function (event) {
@@ -17,6 +18,7 @@ headerBtn.addEventListener('click', function () {
 });
 setTimeout(function(){
 popup.style.display = 'block';
+document.body.style.overflow = 'hidden';
 popup.addEventListener('click', function (event) {
 		let target = event.target;
 		if (target.closest('.popup') && !target.closest(".popup_form")) {
@@ -30,6 +32,7 @@ for (let i=0; i< phone.length; i++) {
 	phone[i].addEventListener('click', function (event) {
 		event.preventDefault();
 		popup.style.display = 'block';
+		document.body.style.overflow = 'hidden';
 		popup.addEventListener('click', function (event) {
 			let target = event.target;
 			if (target.closest('.popup') && !target.closest(".popup_form")) {

@@ -405,27 +405,21 @@ textarea:focus {
 .glazing_price_btn {
   padding: 2rem 2rem;
 }
-.glazing .aluminum,
-.glazing .plastic,
-.glazing .french,
-.glazing .rise {
-  display: none;
-}
 .glazing a.active {
   text-decoration: none;
   color: #454545;
 }
 /*test*/
-/*.tabs li {
+.tabs li {
 	display: inline-block;
 }
 .tabs .glazing_block.active  a {
-			text-decoration: none;
+			/* text-decoration: none; */
 			color: #454545;
 }
 .tabs_divs .noactive {
 	display: none;
-}*/
+}
 /*/test*/
 /*Decoration*/
 .decoration {
