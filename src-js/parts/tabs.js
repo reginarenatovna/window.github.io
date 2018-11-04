@@ -51,7 +51,7 @@ function tabs() {
 		});
 	let decor = document.querySelector('.decoration_slider'),
 			link = document.querySelectorAll('.decor-link'),
-			t = document.querySelectorAll('.decoration_item div a'),
+			t = document.querySelectorAll('.d-link'),
 			tabCont = document.querySelectorAll('.info-tabcont');
 
 	function hideTab(m) {
@@ -87,9 +87,9 @@ function tabs() {
 
 	decor.addEventListener('click', function (event) {
 		let target = event.target;
-		if (target && (target.classList.contains('decor-link') || target.tagName=='A')) {
-			for (let i = 0; i < link.length; i++) {
-				if (target == link[i]) {
+		if (target ) {
+			for (let i = 0; i < t.length; i++) {
+				if (target == t[i]) {
 					hideTab(0);
 					showTab(i);
 					noactiveTab(0);
