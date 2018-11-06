@@ -8,6 +8,7 @@ img.addEventListener('click', function(event){
 		if (target && ( target.classList.contains('small') || target.classList.contains('lupa'))) {
 						let popup = document.querySelector('.popup'),
 								contant = document.getElementById('popup_form'),
+								popupClose = document.querySelector('.popup_close'),
 								div = document.createElement('img');
 							let parent = target.parentNode;
 							div.src = parent.href;
@@ -15,6 +16,7 @@ img.addEventListener('click', function(event){
 							div.classList.add('popup_content');
 							div.style.width = "auto";
 							div.style.maxHeight = "560px";
+						popupClose.style.display = "none";
 						popup.style.display = 'block';
 						popup.addEventListener('click', function (event) {
 							let target = event.target;
