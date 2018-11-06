@@ -20,7 +20,7 @@ img.addEventListener('click', function(event){
 						popup.style.display = 'block';
 						popup.addEventListener('click', function (event) {
 							let target = event.target;
-							if (target.closest('.popup')) {
+							if (target.closest('.popup') && !target.closest('.popup_content')) {
 								event.stopPropagation();
 								popup.style.display = 'none';
 								div.style.display = 'none';
