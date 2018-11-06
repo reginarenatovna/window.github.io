@@ -5,15 +5,20 @@ function calc() {
 			popupCalcProfile = document.querySelector('.popup_calc_profile'),
 			cheakBox = document.querySelectorAll('.checkbox'),
 			popupBtnProfile = document.querySelector('.popup_calc_profile_button');
+	let obj={};
 	for (let i=0; i<btn.length; i++) {
 		btn[i].addEventListener('click', function(){
 			popupCalc.style.display = 'block';
-			document.body.style.overflowY = 'hidden';
+			document.body.style.overflow = 'hidden';
+			let inpCalc = document.querySelectorAll('.popup_calc input');
+			obj.width = objinpCalc[0].value;
+			obj.hight = objinpCalc[1].value ;
 			popupCalc.addEventListener('click', function(event){
 				let target = event.target;
 				if ( target.closest(".popup_calc_close") ) {
 					event.stopPropagation();
 					popupCalc.style.display = 'none';
+					obj = {};
 					let inpCalc = document.querySelectorAll('.popup_calc input');
 					console.log(inpCalc);
 					for (let i = 0; i < inpCalc.length; i++) {
@@ -46,13 +51,21 @@ function calc() {
 popupBtn.addEventListener('click', function(){
 	popupCalc.style.display = 'none';
 	popupCalcProfile.style.display = 'block';
-	let type = document.q
+	let e = document.getElementById("view_type");
+	let strUser = e.options[e.selectedIndex].value;
+	obj.type = strUser;
+	let cheakBox = document.querySelectorAll('.checkbox');
+	for (let i=0; i<cheakBox.length; i++) {
+		if (checkbox[i].checked = true) {
+			obj.t = cheakBox[i];
+		}
+	}
 	popupCalcProfile.addEventListener('click', function (event) {
 		let target = event.target;
 		if (target.closest(".popup_calc_profile_close")) {
 			event.stopPropagation();
 			popupCalcProfile.style.display = 'none';
-			objCalc = {};
+			obj = {};
 		}
 	});
 });
@@ -69,13 +82,16 @@ popupBtnProfile.addEventListener('click', function(){
 let popupCalcEnd = document.querySelector('.popup_calc_end');
 	popupCalcProfile.style.display = 'none';
 	popupCalcEnd.style.display = 'block';
-
+	let inputCalcEnd = document.querySelectorAll('.popup_calc_end input');
+	obj.name=inputCalcEnd[0].value;
+	obj.phone = inputCalcEnd[1].value;
 	popupCalcEnd.addEventListener('click', function (event) {
 		let target = event.target;
 		if (target.closest(".popup_calc_end_close")) {
 			let inputCalcEnd = document.querySelectorAll('.popup_calc_end input');
 			event.stopPropagation();
 			popupCalcEnd.style.display = 'none';
+			obj = {};
 			for (let i = 0; i < inpCalc.length; i++) {
 				inputCalcEnd[i].value = '';
 			}
@@ -125,6 +141,28 @@ let balconIcons = document.querySelector('.balcon_icons'),
 				}
 			}
 		});
+		function postData(data) {
+			return new Promise(function (resolve, reject) {
+				let request = new XMLHttpRequest();
+				request.open('POST', 'server.php');
+				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				request.onreadystatechange = function () {
+					if (request.readyState < 4) {
+						resolve();
+					} else if (request.readyState === 4) {
+						if (request.status === 200 && request.status < 300) {
+							resolve();
+						} else {
+							reject();
+						}
+					}
+				};
+				request.send(data);
+			});
+		}
+		if (obj!=={}) {
+			postData(obj);
+		}
 
 }
 module.exports = calc;
