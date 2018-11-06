@@ -18,6 +18,8 @@ headerBtn.addEventListener('click', function (event) {
 });
 setTimeout(function(){
 popup.style.display = 'block';
+let popupClose = document.querySelector('.popup_close');
+popupClose.style.display = "block";
 document.body.style.overflow = 'hidden';
 popup.addEventListener('click', function (event) {
 		let target = event.target;

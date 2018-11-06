@@ -773,6 +773,27 @@ textarea:focus {
 .popup_calc_content #type1 {
   display: inline-block;
 }
+
+.balcon_icons {
+            margin-bottom: 1rem;
+            overflow: hidden;
+            height: 5em;
+            line-height: 5em;
+            a{
+                img{
+                    transform: scale(0.8);
+                }
+            }
+        }
+.active_type_window{
+  transform: scale(1.32);
+}
+.not_active_type_window{
+  transform: scale(0.8);
+}
+.big_window {
+  margin: auto;
+}
 .popup_calc_close {
   position: absolute;
   top: -2.2rem;

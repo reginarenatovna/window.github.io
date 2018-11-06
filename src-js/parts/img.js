@@ -4,7 +4,6 @@ function img() {
 img.addEventListener('click', function(event){
 					 event.preventDefault();
 					let target = event.target;
-					console.log(target);
 		if (target && ( target.classList.contains('small') || target.classList.contains('lupa'))) {
 						let popup = document.querySelector('.popup'),
 								contant = document.getElementById('popup_form'),
