@@ -14,8 +14,8 @@ img.addEventListener('click', function(event){
 							popup.appendChild(div);
 							div.classList.add('popup_content');
 							div.style.width = "auto";
+							div.style.maxHeight = "560px";
 						popup.style.display = 'block';
-						contant.style.display = 'none';
 						popup.addEventListener('click', function (event) {
 							let target = event.target;
 							if (target.closest('.popup')) {
