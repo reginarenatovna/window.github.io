@@ -10,9 +10,6 @@ function calc() {
 		btn[i].addEventListener('click', function(){
 			popupCalc.style.display = 'block';
 			document.body.style.overflow = 'hidden';
-			let inpCalc = document.querySelectorAll('.popup_calc input');
-			obj.width = objinpCalc[0].value;
-			obj.hight = objinpCalc[1].value ;
 			popupCalc.addEventListener('click', function(event){
 				let target = event.target;
 				if ( target.closest(".popup_calc_close") ) {
@@ -52,14 +49,15 @@ popupBtn.addEventListener('click', function(){
 	popupCalc.style.display = 'none';
 	popupCalcProfile.style.display = 'block';
 	let e = document.getElementById("view_type");
-	let strUser = e.options[e.selectedIndex].value;
+	let strUser = e.options[e.selectedIndex].text;
 	obj.type = strUser;
+	let inpCalc = document.querySelectorAll('.popup_calc-input');
+	let width = inpCalc[0].value,
+		hight = inpCalc[1].value;
+	obj.width = width;
+	obj.hight = hight;
+
 	let cheakBox = document.querySelectorAll('.checkbox');
-	for (let i=0; i<cheakBox.length; i++) {
-		if (checkbox[i].checked = true) {
-			obj.t = cheakBox[i];
-		}
-	}
 	popupCalcProfile.addEventListener('click', function (event) {
 		let target = event.target;
 		if (target.closest(".popup_calc_profile_close")) {
@@ -69,20 +67,11 @@ popupBtn.addEventListener('click', function(){
 		}
 	});
 });
-for (let i=0; i<cheakBox.length; i++) {
-	cheakBox[i].addEventListener('click', function(){
-		cheakBox.forEach((item) => {
-			if (item !== checkbox) {
-				item.checked = false;
-			}
-	});
-});
-}
 popupBtnProfile.addEventListener('click', function(){
 let popupCalcEnd = document.querySelector('.popup_calc_end');
 	popupCalcProfile.style.display = 'none';
 	popupCalcEnd.style.display = 'block';
-	let inputCalcEnd = document.querySelectorAll('.popup_calc_end input');
+	let inputCalcEnd = document.querySelectorAll('.input_end');
 	obj.name=inputCalcEnd[0].value;
 	obj.phone = inputCalcEnd[1].value;
 	popupCalcEnd.addEventListener('click', function (event) {
@@ -141,28 +130,50 @@ let balconIcons = document.querySelector('.balcon_icons'),
 				}
 			}
 		});
-		function postData(data) {
-			return new Promise(function (resolve, reject) {
-				let request = new XMLHttpRequest();
-				request.open('POST', 'server.php');
-				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-				request.onreadystatechange = function () {
-					if (request.readyState < 4) {
-						resolve();
-					} else if (request.readyState === 4) {
-						if (request.status === 200 && request.status < 300) {
-							resolve();
-						} else {
-							reject();
+		let message = {
+			loading: "Загрузка...",
+			success: 'Спасибо! Мы скоро с вами свяжемся!',
+			failure: 'Что-то пошло не так'
+		};
+	let formEnd = document.querySelector('.popup_form-end');
+			function send(elem) {
+				elem.addEventListener('submit', function (e) {
+					e.preventDefault();
+					let statusMessage = document.createElement('div'),
+							input = document.getElementsByTagName('input');
+					elem.appendChild(statusMessage);
+
+					function postData(data) {
+						return new Promise(function (resolve, reject) {
+							let request = new XMLHttpRequest();
+							request.open('POST', 'server.php');
+							request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+							request.onreadystatechange = function () {
+								if (request.readyState < 4) {
+									resolve();
+								} else if (request.readyState === 4) {
+									if (request.status === 200 && request.status < 300) {
+										resolve();
+									} else {
+										reject();
+									}
+								}
+							};
+							request.send(data);
+						});
+					} // end postData
+					function clearInput() {
+						for (let i = 0; i < input.length; i++) {
+							input[i].value = '';
 						}
 					}
-				};
-				request.send(data);
-			});
-		}
-		if (obj!=={}) {
-			postData(obj);
-		}
-
+					postData(obj)
+						.then(() => statusMessage.innerHTML = message.loading)
+						.then(() => statusMessage.innerHTML = message.success)
+						.catch(() => statusMessage.innerHTML = message.failure)
+						.then(clearInput);
+				});
+			}
+send(formEnd);
 }
 module.exports = calc;
