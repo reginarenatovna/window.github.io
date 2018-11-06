@@ -1,16 +1,31 @@
 function img() {
-	let img = document.querySelectorAll('lupa');
-		for (let i=0; i<img.length; i++) {
-			img[i].addEventListener('click', function(event){
-					img.style.width = 'auto';
-					img.style.height = 'auto';
+	let img = document.querySelector('.block-img'),
+			small = document.querySelectorAll('.small');
+img.addEventListener('click', function(event){
+					 event.preventDefault();
 					let target = event.target;
-					if (target.closest('.lupa') ) {
-						event.stopPropagation();
-						img[i].style.display = 'none';
+					console.log(target);
+		if (target && ( target.classList.contains('small') || target.classList.contains('lupa'))) {
+						let popup = document.querySelector('.popup'),
+								contant = document.getElementById('popup_form'),
+								div = document.createElement('img');
+							let parent = target.parentNode;
+							div.src = parent.href;
+							popup.appendChild(div);
+							div.classList.add('popup_content');
+							div.style.width = "auto";
+						popup.style.display = 'block';
+						contant.style.display = 'none';
+						popup.addEventListener('click', function (event) {
+							let target = event.target;
+							if (target.closest('.popup')) {
+								event.stopPropagation();
+								popup.style.display = 'none';
+								div.style.display = 'none';
+							}
+						});
 					}
-			});
-		}
+		 });
 }
 
 module.exports = img;

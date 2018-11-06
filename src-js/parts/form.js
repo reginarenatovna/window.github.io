@@ -46,7 +46,6 @@ for (let i=0; i< phone.length; i++) {
 
 	function validate() {
 		let inputCont = document.querySelectorAll('.popup_input-phone');
-		console.log(inputCont);
 		for (let i = 0; i < inputCont.length; i++) {
 			inputCont[i].setAttribute('maxLenght', 12);
 			tell(inputCont[i]);
@@ -123,9 +122,5 @@ statusMessage.classList.add('status');
 	for (let i=0;i<formContact.length; i++) {
 	sendForm(formContact[i]);
 	}
-
-
-
-
 }
 module.exports = form;
