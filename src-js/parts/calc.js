@@ -57,7 +57,7 @@ function calc() {
 		obj.width = width;
 		obj.hight = hight;
 
-		let cheakBox = document.querySelectorAll('.checkbox');
+		
 		popupCalcProfile.addEventListener('click', function (event) {
 			let target = event.target;
 			if (target.closest(".popup_calc_profile_close")) {
@@ -69,6 +69,12 @@ function calc() {
 	});
 	popupBtnProfile.addEventListener('click', function () {
 		let popupCalcEnd = document.querySelector('.popup_calc_end');
+		let checkBox = document.querySelectorAll('.checkbox');
+		if (checkBox[0].checked == true) {
+			obj.profile = 'Холодное';
+		} else if (checkBox[1].checked == true) {
+			obj.profile = 'Теплое';
+		}
 		popupCalcProfile.style.display = 'none';
 		popupCalcEnd.style.display = 'block';
 		popupCalcEnd.addEventListener('click', function (event) {
@@ -126,6 +132,13 @@ function calc() {
 			}
 		}
 	});
+
+	let btnEnd = document.querySelector('.btn_end');
+	btnEnd.addEventListener('click', function(){
+		let inputEnd = document.querySelectorAll('.input_end');
+		obj.name = inputEnd[0].value;
+		obj.phone = inputEnd[1].value;
+	});
 	let message = {
 		loading: "Загрузка...",
 		success: 'Спасибо! Мы скоро с вами свяжемся!',
@@ -138,8 +151,9 @@ function calc() {
 			let statusMessage = document.createElement('div'),
 				input = document.getElementsByTagName('input');
 			elem.appendChild(statusMessage);
-		let 	obj = {}; 
+			let obj = new Object(); 
 		
+
 			function postData(data) {
 				return new Promise(function (resolve, reject) {
 					let request = new XMLHttpRequest();
@@ -172,5 +186,6 @@ function calc() {
 		});
 	}
 	send(formEnd);
+	console.log(obj);
 }
 module.exports = calc;
