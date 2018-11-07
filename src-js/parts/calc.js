@@ -127,6 +127,7 @@ function calc() {
 				if (target == typeSmallWin[i]) {
 					hidetype_window(0);
 					showtype_window(i);
+					obj.typeWindow = target;
 					break;
 				}
 			}
