@@ -24,6 +24,12 @@ function calc() {
 			});
 		});
 	}
+	let inpCalc = document.querySelectorAll('.popup_calc-input');
+	if ((inpCalc[0].value !== '' && inpCalc[1].value !== '') || (inpCalc[0].value !== 0 && inpCalc[1].value !== 0)) { 
+		
+	} else {
+		popupBtn.disabled = false;
+	}
 	function validate() {
 		let inputCont = document.querySelectorAll('.popup_calc-input');
 		for (let i = 0; i < inputCont.length; i++) {
@@ -44,28 +50,29 @@ function calc() {
 			}
 		});
 	}
-	popupBtn.addEventListener('click', function () {
-		popupCalc.style.display = 'none';
-		popupCalcProfile.style.display = 'block';
-		let e = document.getElementById("view_type");
-		let strUser = e.options[e.selectedIndex].text;
-		obj.type = strUser;
-		let inpCalc = document.querySelectorAll('.popup_calc-input');
-		let width = inpCalc[0].value,
-			hight = inpCalc[1].value;
-		obj.width = width;
-		obj.hight = hight;
-
-		
-		popupCalcProfile.addEventListener('click', function (event) {
-			let target = event.target;
-			if (target.closest(".popup_calc_profile_close")) {
-				event.stopPropagation();
-				popupCalcProfile.style.display = 'none';
-				obj = {};
-			}
+	 popupBtn.addEventListener('click', function () {
+			popupCalc.style.display = 'none';
+		 let inpCalc = document.querySelectorAll('.popup_calc-input');
+			 popupCalcProfile.style.display = 'block';
+			 popupCalc.style.display = 'none';
+			 let e = document.getElementById("view_type");
+			 let strUser = e.options[e.selectedIndex].text;
+			 obj.type = strUser;
+			 let width = inpCalc[0].value,
+				 hight = inpCalc[1].value;
+			 obj.width = width;
+			 obj.hight = hight;
+			 popupCalcProfile.addEventListener('click', function (event) {
+				 let target = event.target;
+				 if (target.closest(".popup_calc_profile_close")) {
+					 event.stopPropagation();
+					 popupCalcProfile.style.display = 'none';
+					 obj = {};
+				 }
+			 });
 		});
-	});
+	
+	
 	popupBtnProfile.addEventListener('click', function () {
 		let popupCalcEnd = document.querySelector('.popup_calc_end');
 		let checkBox = document.querySelectorAll('.checkbox');
@@ -151,7 +158,7 @@ function calc() {
 			let statusMessage = document.createElement('div'),
 				input = document.getElementsByTagName('input');
 			elem.appendChild(statusMessage);
-	
+			let obJson = JSON.stringify(obj);
 
 			function postData(data) {
 				return new Promise(function (resolve, reject) {
@@ -177,7 +184,7 @@ function calc() {
 					input[i].value = '';
 				}
 			}
-			postData(obj)
+			postData(obJson)
 				.then(() => statusMessage.innerHTML = message.loading)
 				.then(() => statusMessage.innerHTML = message.success)
 				.catch(() => statusMessage.innerHTML = message.failure)

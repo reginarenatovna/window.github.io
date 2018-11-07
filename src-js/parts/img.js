@@ -9,14 +9,16 @@ img.addEventListener('click', function(event){
 								contant = document.getElementById('popup_form'),
 								popupClose = document.querySelector('.popup_close'),
 								div = document.createElement('img');
-							let parent = target.parentNode;
-							div.src = parent.href;
-							popup.appendChild(div);
-							div.classList.add('popup_content');
-							div.style.width = "auto";
-							div.style.maxHeight = "560px";
-						popupClose.style.display = "none";
-						popup.style.display = 'block';
+								if (target.classList.contains('lupa')) {
+									let parent = target.parentNode;
+									div.src = parent.href;
+									popup.appendChild(div);
+									div.classList.add('popup_content');
+									div.style.width = "auto";
+									div.style.maxHeight = "560px";
+									popupClose.style.display = "none";
+									popup.style.display = 'block';
+								}
 						popup.addEventListener('click', function (event) {
 							let target = event.target;
 							if (target.closest('.popup') && !target.closest('.popup_content')) {
