@@ -17,7 +17,6 @@ function calc() {
 					event.stopPropagation();
 					popupCalc.style.display = 'none';
 					obj = {};
-					console.log(inpCalc);
 					for (let i = 0; i < input.length; i++) {
 						input[i].value = '';
 					}
@@ -152,8 +151,7 @@ function calc() {
 			let statusMessage = document.createElement('div'),
 				input = document.getElementsByTagName('input');
 			elem.appendChild(statusMessage);
-			let obj = new Object(); 
-		
+	
 
 			function postData(data) {
 				return new Promise(function (resolve, reject) {
