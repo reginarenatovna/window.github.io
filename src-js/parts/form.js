@@ -32,8 +32,10 @@ popup.addEventListener('click', function (event) {
 
 for (let i=0; i< phone.length; i++) {
 	phone[i].addEventListener('click', function (event) {
+		let popupClose = document.querySelector('.popup_close');
 		event.preventDefault();
 		popup.style.display = 'block';
+		popupClose.style.display = "block";
 		document.body.style.overflow = 'hidden';
 		popup.addEventListener('click', function (event) {
 			let target = event.target;
